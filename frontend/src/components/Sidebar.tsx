@@ -34,16 +34,16 @@ const Sidebar = () => {
 
   const menuItems = [
     { path: '/dashboard', icon: LayoutDashboard, label: 'Overview', tourClass: 'tour-dashboard' },
-    { path: '/dashboard/first-aid', icon: Target, label: 'First Aid' , tourClass: 'tour-first-aid'},
-    
     { path: '/dashboard/userinfo', icon: User, label: 'User Data', tourClass: 'tour-userinfo' },
-    { path: '/dashboard/goals', icon: Target, label: 'Goals', tourClass: 'tour-goals' },
-    
+    { path: '/dashboard/first-aid', icon: Target, label: 'First Aid' , tourClass: 'tour-first-aid'},
+    { path: '/dashboard/live', icon: Activity, label: 'HealthAI Live' , tourClass: 'tour-dashboard'},
     { path: '/dashboard/appointments', icon: Calendar, label: 'Appointments' , tourClass: 'tour-appointments'},
     { path: '/dashboard/reports', icon: FileText, label: 'Reports', tourClass: 'tour-report' },
-    { path: '/dashboard/live', icon: Activity, label: 'HealthAI Live' , tourClass: 'tour-dashboard'},
-   { path: '/dashboard/mri-scan', icon: Brain, label: 'Pharma Scan' , tourClass: 'tour-mri-scan'},
     { path: '/dashboard/chatbot', icon: MessageSquare, label: 'Aarogya AI', tourClass: 'tour-chatbot' },
+    { path: '/dashboard/goals', icon: Target, label: 'Goals', tourClass: 'tour-goals' },
+    { path: '/dashboard/mri-scan', icon: Brain, label: 'Pharma Scan' , tourClass: 'tour-mri-scan'},
+    
+    
 
 
     // { path: '/dashboard/diagnosis', icon: Stethoscope, label: 'Diagnosis' },

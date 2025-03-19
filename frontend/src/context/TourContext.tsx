@@ -19,8 +19,8 @@ const steps = [
     content: 'Chat with our AI health assistant and get instant health guidance',
   },
   {
-    selector: '.tour-goals',
-    content: 'Access and manage your health profile',
+    selector: '.tour-first-aid',
+    content: 'View your health overview and daily insights',
   },
   {
     selector: '.tour-appointments',
@@ -31,15 +31,15 @@ const steps = [
     content: 'View your health overview and daily insights',
   },
   {
-    selector: '.tour-mri-scan',
-    content: 'View your health overview and daily insights',
-  },
-  {
     selector: '.tour-chatbot',
     content: 'View your health overview and daily insights',
   },
   {
-    selector: '.tour-first-aid',
+    selector: '.tour-goals',
+    content: 'Access and manage your health profile',
+  },
+  {
+    selector: '.tour-mri-scan',
     content: 'View your health overview and daily insights',
   },
   // Add more tour steps as needed
