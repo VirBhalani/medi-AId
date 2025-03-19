@@ -1,20 +1,19 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { User, Heart, Shield, Activity, Users, Sparkles } from 'lucide-react';
-import { motion } from 'framer-motion';
-import confetti from 'canvas-confetti';
-import axios from 'axios';
 import { useUser } from '@clerk/clerk-react';
+import { motion } from 'framer-motion';
+import { Activity, Heart, Shield, Sparkles, User, Users } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { HealthFormData } from './types';
-import { loadFromLocalStorage, saveToLocalStorage, findFirstIncompleteStep } from './utils';
-import { demoProfiles } from './demoData';
-import { ProgressSteps } from './components/ProgressSteps';
-import { PersonalDetailsForm } from './components/PersonalDetailsForm';
-import { MedicalHistoryForm } from './components/MedicalHistoryForm';
+import { FamilyHistoryForm } from './components/FamilyHistoryForm';
 import { InsuranceDetailsForm } from './components/InsuranceDetailsForm';
 import { LifestyleForm } from './components/LifestyleForm';
-import { FamilyHistoryForm } from './components/FamilyHistoryForm';
+import { MedicalHistoryForm } from './components/MedicalHistoryForm';
+import { PersonalDetailsForm } from './components/PersonalDetailsForm';
+import { ProgressSteps } from './components/ProgressSteps';
+import { demoProfiles } from './demoData';
+import ExportPDFButton from './pdfButton';
+import { HealthFormData } from './types';
+import { findFirstIncompleteStep, loadFromLocalStorage, saveToLocalStorage } from './utils';
 
 const UserInfo = () => {
   const { user } = useUser();
@@ -244,7 +243,6 @@ const UserInfo = () => {
         throw new Error(result.message || 'Failed to save data');
       }
     } catch (error) {
-      console.error('Error saving health profile:', error);
       document.body.style.overflow = 'hidden';
       document.querySelector('.min-h-screen')?.classList.add('blur-sm', 'transition-all', 'duration-300');
 
@@ -261,6 +259,8 @@ const UserInfo = () => {
         <p class="text-gray-600">Your health profile has been saved successfully.</p>
       `;
       document.body.appendChild(successMessage);
+
+      // Add fade-in animation style
       const style = document.createElement('style');
       style.textContent = `
         @keyframes fade-in {
@@ -273,6 +273,7 @@ const UserInfo = () => {
       `;
       document.head.appendChild(style);
 
+      // Redirect after animation and cleanup
       setTimeout(() => {
         // Remove blur and restore scroll before redirecting
         document.querySelector('.min-h-screen')?.classList.remove('blur-sm');
@@ -281,30 +282,6 @@ const UserInfo = () => {
         style.remove();
         navigate('/dashboard');
       }, 2000);
-      // Add blur class to the main container for error state
-      // document.body.style.overflow = 'hidden';
-      // document.querySelector('.min-h-screen')?.classList.add('blur-sm', 'transition-all', 'duration-300');
-      
-      // // Show error message with animation
-      // const errorMessage = document.createElement('div');
-      // errorMessage.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 rounded-xl shadow-2xl z-50 text-center animate-fade-in bg-white/90 backdrop-blur-md';
-      // errorMessage.innerHTML = `
-      //   <div class="mb-4">
-      //     <svg class="mx-auto h-12 w-12 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      //       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-      //     </svg>
-      //   </div>
-      //   <h2 class="text-2xl font-bold text-red-600 mb-4">Error</h2>
-      //   <p class="text-gray-600">Failed to save your health profile. Please try again.</p>
-      // `;
-      // document.body.appendChild(errorMessage);
-
-      // Remove error message, blur and restore scroll after 3 seconds
-      // setTimeout(() => {
-      //   document.querySelector('.min-h-screen')?.classList.remove('blur-sm');
-      //   document.body.style.overflow = '';
-      //   errorMessage.remove();
-      // }, 3000);
     }
   };
 
@@ -373,6 +350,8 @@ const UserInfo = () => {
         <div className="mt-6 sm:mt-8">
           {renderStep()}
         </div>
+
+        <ExportPDFButton formData={formData} />
       </div>
     </div>
   );
