@@ -28,6 +28,10 @@ import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isToday } from "date-fns"
 import AmbulanceAlertModal from "./ambulance-alert-modal"
+import { useNavigate } from "react-router-dom";
+
+
+
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
 const InsightCard = ({
@@ -906,6 +910,7 @@ const Dashboard = () => {
   // Add state for dialog in Dashboard component
   const [showCallDialog, setShowCallDialog] = useState(false)
   const [showAmbulanceAlert, setShowAmbulanceAlert] = useState(false)
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gray-50/50">
@@ -934,7 +939,7 @@ const Dashboard = () => {
                 transition-all duration-300"
             >
               <Sparkles className="w-4 h-4" />
-              <span className="text-sm font-medium">New AI Check</span>
+              <span className="text-sm font-medium" onClick={() => navigate("/dashboard/live")}>New AI Check</span>
             </motion.button>
 
             <motion.button
